@@ -6,11 +6,11 @@ Build configuration: release mode, APP_ENV=production, Supabase project https://
 
 ## Backend prerequisites
 
-Uploading these files does not apply database migrations or verify the live backend. Before activating this release, confirm the compatible operations/finance foundations and the additive migrations through 20261020_admin_stock_receipt_corrections.sql are deployed and verified. This includes unified transactions, setup checks, treasury account locations, security hardening, expense assets, product stock editing, opening costs and salesperson commissions. Follow the deployment guides in the source workspace. Never run fresh setup on an existing database.
+Uploading these files does not apply database migrations or verify the live backend. Before activating this release, confirm the compatible operations/finance foundations and the additive migrations through 20261021_stock_receipt_transaction_visibility.sql are deployed and verified. This includes unified transactions, setup checks, treasury account locations, security hardening, expense assets, product stock editing, opening costs and salesperson commissions. Follow the deployment guides in the source workspace. Never run fresh setup on an existing database.
 
 ## Validation
 
-The Flutter production web build completed successfully. The latest feature validation passed five receipt database tests and 26 focused Flutter tests, plus static analysis. Static entrypoint and asset checks passed before upload. Live authentication and business transactions were not tested.
+The Flutter production web build completed successfully. The latest receipt changes passed eight focused database tests and 17 Flutter tests, plus static analysis. Static entrypoint and asset checks passed before upload. Live authentication and business transactions were not tested.
 
 ## cPanel deployment
 
@@ -25,3 +25,9 @@ Deployment overwrites matching application files but does not delete unrelated f
 Admins can edit/delete posted stock receipts from Transactions → Vendor purchase details. Corrections reverse inventory and payments atomically and retain the original receipt for audit. Inventory analytics → category product details shows recorded unit and stock costs, including unsold products and branch-specific costs.
 
 Before deploying this app, apply the additive SQL files in `deployment/` in filename order, if not already applied. They require the existing compatible finance/security schema. The SQL is not executed by cPanel and is not copied into public_html. See [receipt deployment notes](deployment/stock-receipt-corrections.md). No live database changes were performed during the release upload.
+
+## Latest release: supplier receipts in Operations
+
+Operations → Inventory and Stock → Supplier receipts opens the branch purchase history. Admins can open a receipt and edit or delete it using the secured correction commands. New paid stock receipts explicitly create purchase documents before posting their linked outgoing payments, and refresh the transaction and treasury views.
+
+Before deploying, apply [the additive receipt visibility SQL](deployment/20261021_stock_receipt_transaction_visibility.sql) after migration 20261020. Missing historical headers are restored without replaying payments, inventory or treasury balances; historical payment matching is not guessed. See [deployment notes](deployment/supplier-receipts.md).
