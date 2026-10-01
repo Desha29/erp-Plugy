@@ -11,3 +11,11 @@ Uploading these files does not apply database migrations or verify the live back
 ## Validation
 
 The Flutter production web build completed successfully. Five focused Supabase configuration and salesperson permission tests passed. Static entrypoint and asset checks passed before upload. Live authentication and business transactions were not tested.
+
+## cPanel deployment
+
+The repository-root `.cpanel.yml` deploys only the web application files into the cPanel account's `$HOME/public_html/`. Keep the Git checkout outside `public_html`, for example `$HOME/repositories/erp-Plugy`.
+
+In cPanel, open Git Version Control, manage this repository, and choose Pull or Deploy → Update from Remote → Deploy HEAD Commit. Pull deployment from GitHub is manual; a GitHub push alone does not trigger it. For another domain's document root, adjust DEPLOYPATH in `.cpanel.yml`.
+
+Deployment overwrites matching application files but does not delete unrelated files or copy repository metadata. If another application already occupies the document root, use a dedicated document root instead. No Flutter build is required on the hosting server.
