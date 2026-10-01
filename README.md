@@ -6,11 +6,11 @@ Build configuration: release mode, APP_ENV=production, Supabase project https://
 
 ## Backend prerequisites
 
-Uploading these files does not apply database migrations or verify the live backend. Before activating this release, confirm the compatible operations/finance foundations and the additive migrations through 20261018_salesperson_commission.sql are deployed and verified. This includes unified transactions, setup checks, treasury account locations, security hardening, expense assets, product stock editing, opening costs and salesperson commissions. Follow the deployment guides in the source workspace. Never run fresh setup on an existing database.
+Uploading these files does not apply database migrations or verify the live backend. Before activating this release, confirm the compatible operations/finance foundations and the additive migrations through 20261020_admin_stock_receipt_corrections.sql are deployed and verified. This includes unified transactions, setup checks, treasury account locations, security hardening, expense assets, product stock editing, opening costs and salesperson commissions. Follow the deployment guides in the source workspace. Never run fresh setup on an existing database.
 
 ## Validation
 
-The Flutter production web build completed successfully. Five focused Supabase configuration and salesperson permission tests passed. Static entrypoint and asset checks passed before upload. Live authentication and business transactions were not tested.
+The Flutter production web build completed successfully. The latest feature validation passed five receipt database tests and 26 focused Flutter tests, plus static analysis. Static entrypoint and asset checks passed before upload. Live authentication and business transactions were not tested.
 
 ## cPanel deployment
 
@@ -19,3 +19,9 @@ The repository-root `.cpanel.yml` deploys only the web application files into th
 In cPanel, open Git Version Control, manage this repository, and choose Pull or Deploy → Update from Remote → Deploy HEAD Commit. Pull deployment from GitHub is manual; a GitHub push alone does not trigger it. For another domain's document root, adjust DEPLOYPATH in `.cpanel.yml`.
 
 Deployment overwrites matching application files but does not delete unrelated files or copy repository metadata. If another application already occupies the document root, use a dedicated document root instead. No Flutter build is required on the hosting server.
+
+## Latest release: stock receipt administration and inventory cost
+
+Admins can edit/delete posted stock receipts from Transactions → Vendor purchase details. Corrections reverse inventory and payments atomically and retain the original receipt for audit. Inventory analytics → category product details shows recorded unit and stock costs, including unsold products and branch-specific costs.
+
+Before deploying this app, apply the additive SQL files in `deployment/` in filename order, if not already applied. They require the existing compatible finance/security schema. The SQL is not executed by cPanel and is not copied into public_html. See [receipt deployment notes](deployment/stock-receipt-corrections.md). No live database changes were performed during the release upload.
